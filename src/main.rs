@@ -1,5 +1,5 @@
 use clap::Parser;
-use color_eyre::eyre::{Result, bail};
+use color_eyre::eyre::Result;
 use license_fetcher::get_package_list_macro;
 use tracing::info;
 

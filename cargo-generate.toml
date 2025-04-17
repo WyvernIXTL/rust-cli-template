@@ -1,0 +1,12 @@
+[template]
+cargo_generate_version = ">=0.22.1"
+ignore = [ 
+  "LICENSE",
+]
+description = { prompt = "Description", type = "string" }
+repo_url = { prompt = "Current or future (github?) repo url.", type = "string" }
+
+[hooks]
+pre = [
+    "pre.rhai",
+]

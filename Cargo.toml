@@ -2,7 +2,7 @@
 name = "rust-project-template"
 version = "0.1.0"
 edition = "2024"
-repository = "https://github.com/WyvernIXTL/ubilerntui"
+repository = "{{repo_url}}"
 
 [dependencies]
 clap = { version = "4.5.36", features = ["derive"] }
