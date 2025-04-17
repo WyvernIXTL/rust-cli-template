@@ -1,0 +1,18 @@
+[package]
+name = "rust-project-template"
+version = "0.1.0"
+edition = "2024"
+repository = "https://github.com/WyvernIXTL/ubilerntui"
+
+[dependencies]
+clap = { version = "4.5.36", features = ["derive"] }
+color-eyre = {version = "0.6.3", features = ["issue-url"]}
+directories = "6.0.0"
+license-fetcher = "0.6.4"
+tracing = {version = "0.1.41", features = ["release_max_level_debug"]}
+tracing-appender = "0.2.3"
+tracing-error = "0.2.1"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter", "json"] }
+
+[build-dependencies]
+license-fetcher = { version = "0.6.4", features = ["build"] }
