@@ -1,7 +1,9 @@
 {
     "words": [
         "appender",
+        "codegen",
         "Kellar",
+        "mimalloc",
         "rhai",
         "SPANTRACE",
         "Spantraces"

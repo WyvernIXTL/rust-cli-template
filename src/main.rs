@@ -3,6 +3,13 @@ use color_eyre::eyre::Result;
 use license_fetcher::get_package_list_macro;
 use tracing::info;
 
+#[cfg(feature = "mimalloc")]
+use mimalloc::MiMalloc;
+
+#[cfg(feature = "mimalloc")]
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
+
 mod arguments;
 mod setup;
 

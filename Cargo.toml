@@ -1,18 +1,30 @@
 [package]
-name = "rust-project-template"
+    name = "{{project-name}}"
 version = "0.1.0"
 edition = "2024"
 repository = "{{repo_url}}"
+
+[profile.release]
+# Following settings make compilation in release mode slower, 
+# but **might** have positive performance implications. 
+lto = "fat"
+codegen-units = 1
 
 [dependencies]
 clap = { version = "4.5.36", features = ["derive"] }
 color-eyre = {version = "0.6.3", features = ["issue-url"]}
 directories = "6.0.0"
 license-fetcher = "0.6.4"
+mimalloc = { version = "0.1.46", features = ["secure"], optional = true }
 tracing = {version = "0.1.41", features = ["release_max_level_debug"]}
 tracing-appender = "0.2.3"
 tracing-error = "0.2.1"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter", "json"] }
 
 [build-dependencies]
+# Generates license information at build time.
 license-fetcher = { version = "0.6.4", features = ["build"] }
+
+[features]
+# Enables faster memory allocator.
+mimalloc = ["dep:mimalloc"]
