@@ -33,7 +33,7 @@ cargo install cargo-generate
 
 Use cargo generate to generate your new project:
 ```
-cargo generate --git <PLACEHOLDER>
+cargo generate --git https://github.com/WyvernIXTL/rust-cli-template
 ```
 
 > [!NOTE]
