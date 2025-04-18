@@ -6,6 +6,7 @@
         "mimalloc",
         "rhai",
         "SPANTRACE",
-        "Spantraces"
+        "Spantraces",
+        "Swatinem"
     ]
 }
