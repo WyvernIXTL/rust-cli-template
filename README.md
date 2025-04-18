@@ -6,6 +6,7 @@
 
 </div>
 
+
 ## Features
 
 * Logging:
@@ -20,10 +21,28 @@
     * A link to create a github issue is supplied in release mode.
 
 
+## Usage
+
+Install [`cargo-generate`](https://github.com/cargo-generate/cargo-generate):
+```
+cargo install cargo-generate
+```
+
+Use cargo generate to generate your new project:
+```
+cargo generate --git <PLACEHOLDER>
+```
+
+> [!NOTE]
+> This might take some time (20s).
+
+
 ## Warning
 
 This template pulls in a fair bit of dependencies. This means that the compile is slow from the get go.
 Though not slower than using color eyre and tracing in your own project.
+
+I recommend checking out [this guide](https://nnethercote.github.io/perf-book/build-configuration.html#minimizing-compile-times).
 
 
 ## License

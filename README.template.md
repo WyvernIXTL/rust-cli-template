@@ -22,11 +22,11 @@
 cargo install {{crate_name}}
 ```
 
-## [Precompiled Binaries]({{repo_url}}/releases)
 
+## Precompiled Binaries
 
-## 
+Precompiled binaries for Windows, Linux and MacOS can be found on the [release page]({{repo_url}}/releases).
+
 
 ## License
-
-## 
+ 
