@@ -9,15 +9,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PROJECT_NAME: testtemplate
     steps:
       - uses: actions/checkout@v4
-      - uses: cargo-generate/cargo-generate-action@latest
-        with:
-          name: random-name
-          arguments: "--define description=description --define repo_url=https://example.com"
       - uses: Swatinem/rust-cache@v2
         with:
           save-if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          cache-all-crates: "true"
+      - name: Install Cargo Generate
+        run: cargo install cargo-generate
+      - name: Generate Template
+        run: cargo generate --path . --name $PROJECT_NAME --define description=description --define repo_url=https://example.com
       # we need to move the generated project to a temp folder, away from the template project
       # otherwise `cargo` runs would fail 
       # see https://github.com/rust-lang/cargo/issues/9922
