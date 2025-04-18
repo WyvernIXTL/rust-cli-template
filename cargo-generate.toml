@@ -13,3 +13,4 @@ repo_url = { prompt = "Current or future (github?) repo url.", type = "string" }
 pre = [
     "pre.rhai",
 ]
+post = ["post.rhai"]

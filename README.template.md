@@ -29,4 +29,5 @@ Precompiled binaries for Windows, Linux and MacOS can be found on the [release p
 
 
 ## License
- 
+
+This project is under the [<PLACEHOLDER> license](./LICENSE).
