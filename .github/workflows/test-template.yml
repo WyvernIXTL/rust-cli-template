@@ -21,5 +21,5 @@ jobs:
       - name: Generate Template and Test
         run: |
           cargo generate --path .. --name $PROJECT_NAME --define description=description --define repo_url=https://example.com
-          d $PROJECT_NAME
+          cd $PROJECT_NAME
           cargo check
