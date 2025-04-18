@@ -1,0 +1,98 @@
+name: Release
+
+permissions:
+  contents: write
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  compile-and-upload:
+    continue-on-error: true
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-unknown-linux-gnu
+            os: ubuntu-latest
+            rustflags: "-C target-cpu=x86-64-v3"
+            cargoargs: "-F mimalloc"
+          - target: aarch64-apple-darwin
+            os: macos-latest
+            rustflags: ""
+            cargoargs: "-F mimalloc"
+          - target: x86_64-apple-darwin
+            os: macos-latest
+            rustflags: "-C target-cpu=x86-64-v3"
+            cargoargs: "-F mimalloc"
+          - target: i686-pc-windows-msvc
+            os: windows-latest
+            rustflags: "-C target-cpu=x86-64-v3"
+            cargoargs: "-F mimalloc"
+          - target: x86_64-pc-windows-msvc
+            os: windows-latest
+            rustflags: "-C target-cpu=x86-64-v3"
+            cargoargs: "-F mimalloc"
+          - target: aarch64-pc-windows-msvc
+            os: windows-latest
+            rustflags: ""
+            cargoargs: ""
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Target
+        run: rustup target add {% raw %}${{ matrix.target }}{% endraw %}
+      - name: Compile
+        env:
+          RUSTFLAGS: >-
+            {% raw %}${{ matrix.rustflags }}{% endraw %}
+        run: cargo build --release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
+      - name: Zip Binary (windows)
+        if: runner.os == 'Windows'
+        run: 7z a {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.7z ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}}.exe ./README.md
+      - name: Tar Binary (linux/mac)
+        if: runner.os != 'Windows'
+        run: tar -cJf {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.tar.xz ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}} ./README.md
+      - name: Upload Binary
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            {{project-name}}*
+
+  compile-and-upload-cross:
+    continue-on-error: true
+    strategy:
+      matrix:
+        include:
+          - target: aarch64-unknown-linux-gnu
+            os: ubuntu-latest
+            rustflags: ""
+            cargoargs: "-F mimalloc"
+          - target: i686-unknown-linux-gnu
+            os: ubuntu-latest
+            rustflags: "-C target-cpu=x86-64-v3"
+            cargoargs: "-F mimalloc"
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Cross
+        run: cargo install cross --git https://github.com/cross-rs/cross
+      - name: Compile
+        env:
+          RUSTFLAGS: >-
+            {% raw %}${{ matrix.rustflags }}{% endraw %}
+        run: cross build --release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
+      - name: Zip Binary (windows)
+        if: runner.os == 'Windows'
+        run: 7z a {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.7z ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}}.exe ./README.md
+      - name: Tar Binary (linux/mac)
+        if: runner.os != 'Windows'
+        run: tar -cJf {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.tar.xz ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}} ./README.md
+      - name: Upload Binary
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            {{project-name}}*
+

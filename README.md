@@ -19,6 +19,9 @@
     * Pretty backtraces and spantraces are supported through color eyre.
     * Backtraces are fully shown in debug mode and omitted in release mode.
     * A link to create a github issue is supplied in release mode.
+* CI
+    * Comes with automatic release builds for most platforms.
+    * Unit tests.
 
 
 ## Usage

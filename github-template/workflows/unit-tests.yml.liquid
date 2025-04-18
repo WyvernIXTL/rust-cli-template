@@ -1,0 +1,24 @@
+{% raw %}
+name: Unit Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  test-pr:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Swatinem/rust-cache@v2
+        with:
+          save-if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
+      - name: Run Unit Tests
+        run: cargo test
+{% endraw %}

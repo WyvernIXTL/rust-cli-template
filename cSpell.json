@@ -5,6 +5,8 @@
         "Kellar",
         "mimalloc",
         "rhai",
+        "rustflags",
+        "softprops",
         "SPANTRACE",
         "Spantraces",
         "Swatinem"
