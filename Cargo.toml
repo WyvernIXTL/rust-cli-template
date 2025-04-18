@@ -25,6 +25,9 @@ tracing-subscriber = { version = "0.3.19", features = ["env-filter", "json"] }
 # Generates license information at build time.
 license-fetcher = { version = "0.6.4", features = ["build"] }
 
+[dev-dependencies]
+pretty_assertions = "1.4.1"
+
 [features]
 # Enables faster memory allocator.
 mimalloc = ["dep:mimalloc"]

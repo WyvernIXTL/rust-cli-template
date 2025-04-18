@@ -38,13 +38,14 @@ fn setup_color_eyre() {
         .display_env_section(cfg!(debug_assertions));
 
     if !cfg!(debug_assertions) {
-        hook_builder = hook_builder.issue_url(concat!(env!("CARGO_PKG_REPOSITORY"), "/issues/new"))
+        hook_builder = hook_builder
+            .issue_url(concat!(env!("CARGO_PKG_REPOSITORY"), "/issues/new"))
+            .add_issue_metadata("version", env!("CARGO_PKG_VERSION"))
+            .add_issue_metadata("os", consts::OS)
+            .add_issue_metadata("arch", consts::ARCH)
     }
 
     hook_builder
-        .add_issue_metadata("version", env!("CARGO_PKG_VERSION"))
-        .add_issue_metadata("os", consts::OS)
-        .add_issue_metadata("arch", consts::ARCH)
         .install()
         .expect("Failed setting up color eyre (pretty console errors and printing of backtraces).");
 }

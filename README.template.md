@@ -12,6 +12,7 @@
 
 </div>
 
+## Features
 
 ## Installation
 
@@ -21,3 +22,11 @@
 cargo install {{crate_name}}
 ```
 
+## [Precompiled Binaries]({{repo_url}}/releases)
+
+
+## 
+
+## License
+
+## 
