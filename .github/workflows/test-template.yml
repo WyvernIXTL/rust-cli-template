@@ -19,11 +19,11 @@ jobs:
           cache-all-crates: "true"
       - name: Install Cargo Generate
         run: cargo install cargo-generate
-      - name: Generate Template
-        run: cargo generate --path . --name $PROJECT_NAME --define description=description --define repo_url=https://example.com
-      # we need to move the generated project to a temp folder, away from the template project
-      # otherwise `cargo` runs would fail 
-      # see https://github.com/rust-lang/cargo/issues/9922
+      - name: Generate Template and Test
+        run: |
+          mkdir $PROJECT_NAME
+          cd $PROJECT_NAME
+          cargo generate --path .. --name $PROJECT_NAME --define description=description --define repo_url=https://example.com
       - run: |
           mv $PROJECT_NAME ${{ runner.temp }}/
           cd ${{ runner.temp }}/$PROJECT_NAME
