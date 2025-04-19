@@ -43,6 +43,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Install Target
         run: rustup target add {% raw %}${{ matrix.target }}{% endraw %}
+      - name: Build Cache
+        uses: Swatinem/rust-cache@v2
       - name: Compile
         env:
           RUSTFLAGS: {% raw %}${{ matrix.rustflags }}{% endraw %}
@@ -79,7 +81,7 @@ jobs:
       - name: Install Cargo Binstall
         uses: cargo-bins/cargo-binstall@main
       - name: Install Cross
-        run: cargo binstall cross
+        run: cargo binstall -y cross
       - name: Compile
         env:
           RUSTFLAGS: {% raw %}${{ matrix.rustflags }}{% endraw %}
