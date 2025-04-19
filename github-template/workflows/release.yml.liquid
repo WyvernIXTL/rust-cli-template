@@ -51,10 +51,12 @@ jobs:
         run: cargo build --release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
       - name: Zip Binary (windows)
         if: runner.os == 'Windows'
-        run: 7z a {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.7z ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}}.exe ./README.md ./CHANGELOG.md
+        run: | 
+          7z a {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.7z ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}}.exe ./README.md ./CHANGELOG.md
+          7z a {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.txz ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}}.exe ./README.md ./CHANGELOG.md
       - name: Tar Binary (linux/mac)
         if: runner.os != 'Windows'
-        run: tar -cJf {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.tar.xz ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}} ./README.md ./CHANGELOG.md
+        run: tar -cJf {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.txz ./target/{% raw %}${{ matrix.target }}{% endraw %}/release/{{project-name}} ./README.md ./CHANGELOG.md
       - name: Upload Binary
         uses: softprops/action-gh-release@v2
         with:
