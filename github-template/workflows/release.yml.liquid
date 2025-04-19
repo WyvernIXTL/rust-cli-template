@@ -16,22 +16,22 @@ jobs:
           - target: aarch64-apple-darwin
             os: macos-latest
             rustflags: ""
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: x86_64-apple-darwin
             os: macos-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: i686-pc-windows-msvc
             os: windows-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: x86_64-pc-windows-msvc
             os: windows-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: aarch64-pc-windows-msvc
             os: windows-latest
-            rustflags: "-F mimalloc --profile optimized-release"
+            rustflags: "-F mimalloc"
             cargoargs: ""
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
@@ -42,7 +42,7 @@ jobs:
       - name: Compile
         env:
           RUSTFLAGS: {% raw %}${{ matrix.rustflags }}{% endraw %}
-        run: cargo build --release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
+        run: cargo build --profile optimized-release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
       - name: Zip Binary (windows)
         if: runner.os == 'Windows'
         run: | 
@@ -65,15 +65,15 @@ jobs:
           - target: aarch64-unknown-linux-musl
             os: ubuntu-latest
             rustflags: ""
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: i686-unknown-linux-musl
             os: ubuntu-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc --profile optimized-release"
+            cargoargs: "-F mimalloc"
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
       - name: Checkout
@@ -85,7 +85,7 @@ jobs:
       - name: Compile
         env:
           RUSTFLAGS: {% raw %}${{ matrix.rustflags }}{% endraw %}
-        run: cross build --release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
+        run: cross build --profile optimized-release --target {% raw %}${{ matrix.target }}{% endraw %} {% raw %}${{ matrix.cargoargs }}{% endraw %}
       - name: Tar Binary
         run: tar -cJf {{project-name}}-{% raw %}${{ github.ref_name }}{% endraw %}-{% raw %}${{ matrix.target }}{% endraw %}.txz ./target/{% raw %}${{ matrix.target }}{% endraw %}/optimized-release/{{project-name}} ./README.md ./CHANGELOG.md
       - name: Upload Binary
