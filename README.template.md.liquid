@@ -32,9 +32,9 @@ cargo binstall {{project-name}}
 | Windows  | x86_64    | `{{project-name}}-VERSION-x86_64-pc-windows-msvc.7z` |
 | Windows  | i686      | `{{project-name}}-VERSION-i686-pc-windows-msvc.7z`   |
 | Windows  | aarch64   | `{{project-name}}-VERSION-aarch64-pc-windows-msvc.7z`|
-| Linux    | x86_64    | `{{project-name}}-VERSION-x86_64-unknown-linux-gnu.txz` |
-| Linux    | i686      | `{{project-name}}-VERSION-i686-unknown-linux-gnu.txz`   |
-| Linux    | aarch64   | `{{project-name}}-VERSION-aarch64-unknown-linux-gnu.txz`|
+| Linux    | x86_64    | `{{project-name}}-VERSION-x86_64-unknown-linux-musl.txz` |
+| Linux    | i686      | `{{project-name}}-VERSION-i686-unknown-linux-musl.txz`   |
+| Linux    | aarch64   | `{{project-name}}-VERSION-aarch64-unknown-linux-musl.txz`|
 | MacOS    | x86_64    | `{{project-name}}-VERSION-x86_64-apple-darwin.txz`     |
 | MacOS    | aarch64   | `{{project-name}}-VERSION-aarch64-apple-darwin.txz`    |
 
@@ -52,6 +52,9 @@ cargo install {{project-name}}
 ```
 
 #### Optimized Builds
+
+Use the `-F mimalloc` option to enable a faster memory allocator.
+
 
 **On Unix (Linux/MacOS) with x86 CPUs:**
 
