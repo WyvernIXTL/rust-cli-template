@@ -16,19 +16,48 @@
 
 ## Installation
 
+### Precompiled Binaries
+
+[![Release Page](https://badgen.net/badge/releases/latest?icon=github&scale=1.5)]({{repo_url}}/releases/latest)
+
+| Platform | Architecture      | File Pattern |
+|----------|-----------|--------------|
+| Windows  | x86_64    | `{{project-name}}-VERSION-x86_64-pc-windows-msvc.tar.xz` |
+| Windows  | i686      | `{{project-name}}-VERSION-i686-pc-windows-msvc.tar.xz`   |
+| Windows  | aarch64   | `{{project-name}}-VERSION-aarch64-pc-windows-msvc.tar.xz`|
+| Linux    | x86_64    | `{{project-name}}-VERSION-x86_64-unknown-linux-gnu.tar.xz` |
+| Linux    | i686      | `{{project-name}}-VERSION-i686-unknown-linux-gnu.tar.xz`   |
+| Linux    | aarch64   | `{{project-name}}-VERSION-aarch64-unknown-linux-gnu.tar.xz`|
+| MacOS    | x86_64    | `{{project-name}}-VERSION-x86_64-apple-darwin.tar.xz`     |
+| MacOS    | aarch64   | `{{project-name}}-VERSION-aarch64-apple-darwin.tar.xz`    |
+
+> [!NOTE]
+> **If your CPU/PC is newer than 2013, you don't have to worry.**
+> The x86 binaries all expect CPUs with support for [`x86-64-v3`](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels).  
+
+
 ### From Source
 
-```
+To install the latest version from [crates.io](https://crates.io/crates/{{crate_name}}):
+
+```sh
 cargo install {{crate_name}}
 ```
 
+#### Optimized Builds
 
-## Precompiled Binaries
+**On Unix (Linux/MacOS) with x86 CPUs:**
 
-Precompiled binaries for Windows, Linux and MacOS can be found on the [release page]({{repo_url}}/releases).
+```sh
+RUSTFLAGS="-C target-cpu=x86-64-v3" cargo install {{crate_name}} -F mimalloc
+```
 
-> [!NOTE]
-> The x86 binaries all expect CPUs with [`x86-64-v3`](https://en.wikipedia.org/wiki/X86-64#Microarchitecture_levels). **If your CPU/PC is newer than 2013, you don't have to worry.**
+**On Windows with x86 CPUs:**
+
+```powershell
+$env:RUSTFLAGS="-C target-cpu=x86-64-v3"
+cargo install {{crate_name}} -F mimalloc
+```
 
 
 ## License

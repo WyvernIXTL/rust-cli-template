@@ -6,6 +6,8 @@
         "endraw",
         "Kellar",
         "mimalloc",
+        "msvc",
+        "pwsh",
         "rhai",
         "rustflags",
         "softprops",
