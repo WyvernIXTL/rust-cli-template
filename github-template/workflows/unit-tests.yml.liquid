@@ -22,4 +22,6 @@ jobs:
           save-if: ${{ github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
       - name: Run Unit Tests
         run: cargo test
+        env:
+          RUSTFLAGS: -C link-arg=-fuse-ld=lld
 {% endraw %}
