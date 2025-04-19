@@ -4,10 +4,10 @@
 
 **{{description}}**
 
-*Recommended badges:*
-* https://shields.io/badges/crates-io-version with LINK!!!
-* https://shields.io/badges/docs-rs with LINK!!!
-* https://shields.io/badges/git-hub-license
+[![crate version](https://badgen.net/#crates/v/{{project-name}})](https://crates.io/crates/{{project-name}})
+
+* Other recommended badges:*
+* https://shields.io/badges/git-hub-license OR https://badgen.net/#github/license
 * https://deps.rs/
 
 </div>
@@ -38,10 +38,10 @@
 
 ### From Source
 
-To install the latest version from [crates.io](https://crates.io/crates/{{crate_name}}):
+To install the latest version from [crates.io](https://crates.io/crates/{{project-name}}):
 
 ```sh
-cargo install {{crate_name}}
+cargo install {{project-name}}
 ```
 
 #### Optimized Builds
@@ -49,14 +49,14 @@ cargo install {{crate_name}}
 **On Unix (Linux/MacOS) with x86 CPUs:**
 
 ```sh
-RUSTFLAGS="-C target-cpu=x86-64-v3" cargo install {{crate_name}} -F mimalloc
+RUSTFLAGS="-C target-cpu=x86-64-v3" cargo install {{project-name}} -F mimalloc
 ```
 
 **On Windows with x86 CPUs:**
 
 ```powershell
 $env:RUSTFLAGS="-C target-cpu=x86-64-v3"
-cargo install {{crate_name}} -F mimalloc
+cargo install {{project-name}} -F mimalloc
 ```
 
 
