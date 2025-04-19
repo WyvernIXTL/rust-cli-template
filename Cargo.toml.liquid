@@ -5,8 +5,9 @@ edition = "2024"
 description = "{{description}}"
 repository = "{{repo_url}}"
 
-[profile.release]
-# Following settings make compilation in release mode slower, 
+[profile.optimized-release]
+inherits = "release"
+# Following settings make compilation much slower,
 # but **might** have positive performance implications. 
 lto = "fat"
 codegen-units = 1

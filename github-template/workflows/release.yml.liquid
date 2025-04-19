@@ -16,22 +16,22 @@ jobs:
           - target: aarch64-apple-darwin
             os: macos-latest
             rustflags: ""
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: x86_64-apple-darwin
             os: macos-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: i686-pc-windows-msvc
             os: windows-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: x86_64-pc-windows-msvc
             os: windows-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: aarch64-pc-windows-msvc
             os: windows-latest
-            rustflags: "-F mimalloc"
+            rustflags: "-F mimalloc --profile optimized-release"
             cargoargs: ""
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
@@ -65,15 +65,15 @@ jobs:
           - target: aarch64-unknown-linux-musl
             os: ubuntu-latest
             rustflags: ""
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: i686-unknown-linux-musl
             os: ubuntu-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
           - target: x86_64-unknown-linux-musl
             os: ubuntu-latest
             rustflags: "-C target-cpu=x86-64-v3"
-            cargoargs: "-F mimalloc"
+            cargoargs: "-F mimalloc --profile optimized-release"
     runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     steps:
       - name: Checkout
